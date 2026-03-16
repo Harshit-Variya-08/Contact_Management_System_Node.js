@@ -4,10 +4,10 @@ const app = express();
 import dotenv from 'dotenv';  // For accessing value from .env file to here..
 dotenv.config();
 
-app.get("/api/contacts",(req,resp)=>
-{
-    resp.status(200).json({"Message":"Get all contacts"});
-})
+
+
+import Contact_router from './Routes/contactRouter.js';
+app.use("/api/contacts",Contact_router);   //it will work as middleware
 
 app.listen(process.env.PORT,()=>
 {
