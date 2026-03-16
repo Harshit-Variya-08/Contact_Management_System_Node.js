@@ -1,6 +1,7 @@
 import express from 'express';
 import { createContact, deleteContact, getContact, getContacts, updateContact } from '../controllers/contactController.js';
 const app = express();
+
 const router =  express.Router();
 
 router.get("/",getContacts);       // For getting all contacts

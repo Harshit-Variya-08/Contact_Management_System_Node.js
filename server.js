@@ -1,10 +1,10 @@
 import express from 'express';
 const app = express();
-
+import dbConnect from './config/dbConnection.js';
 import dotenv from 'dotenv';  // For accessing value from .env file to here..
 dotenv.config();
-
-
+app.use(express.json());
+dbConnect();   // Connecting with database 
 
 import Contact_router from './Routes/contactRouter.js';
 app.use("/api/contacts",Contact_router);   //it will work as middleware
