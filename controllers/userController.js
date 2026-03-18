@@ -1,7 +1,8 @@
     import bcrypt from 'bcrypt';
     import jwt from 'jsonwebtoken';
     import userModel from "../Models/userModel.js";
-
+import cookieParser from 'cookie-parser';
+    
     //@ Desc : Register User
     // @router : POST api/users/register
     //@access public
@@ -23,6 +24,7 @@
                             email,
                             password : hash
                         })
+                        
                         resp.status(201).json({ message: "Registered", data : user });
                 });
             })
@@ -46,7 +48,8 @@
                         email,
                         name: user.name,
                         id : user.id
-                    }},process.env.JWT_SECRET,{expiresIn: "1m"});
+                    }},process.env.JWT_SECRET,{expiresIn: "10m"});
+                    resp.cookie("loginToken",accessToken);
                     resp.json({ message: "Logged in" ,token : accessToken});
                 }
                 else

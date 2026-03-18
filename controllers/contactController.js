@@ -1,19 +1,16 @@
 import contactModel from "../Models/contactMode.js";
-
-
-
-
 // @description : Get all Contacts
 // @route : GET /api/contacts
-// @ access : Public
+// @ access : Private
 export const getContacts = async(req, resp) => {
-    const data = await contactModel.find();
+    const data = await contactModel.find({user_id:req.user.id});
+    console.log(data);
   resp.status(200).json(data);
 };
 
 // @description : Create Contact
 // @route : POST /api/contacts
-// @ access : Public
+// @ access : Private
 export const createContact = async(req, resp) => {
     let {name,email,phone} = req.body;
         const data = await contactModel.create({
@@ -27,7 +24,7 @@ export const createContact = async(req, resp) => {
 
 // @description : Get individual Contact
 // @route : GET /api/contacts/:id
-// @ access : Public
+// @ access : Private
 
 export const getContact = async(req, resp) => {
     const data = await contactModel.findById(req.params.id);
@@ -37,7 +34,7 @@ export const getContact = async(req, resp) => {
 
 // @description : Update Contact
 // @route : PUT /api/contacts/:id
-// @ access : Public
+// @ access : Private
 export const updateContact =async (req, resp) => {
     const data = await contactModel.findByIdAndUpdate(req.params.id,req.body,{new:true});
   resp.json({ message: `Update the contact ${req.params.id}` , data : data});
@@ -45,7 +42,7 @@ export const updateContact =async (req, resp) => {
 
 // @description : Delete Contact
 // @route : DELETE /api/contacts/:id
-// @ access : Public
+// @ access : Private
 export const deleteContact = async (req, resp) => {
     const data = await contactModel.findByIdAndDelete(req.params.id,{new:true});
 
