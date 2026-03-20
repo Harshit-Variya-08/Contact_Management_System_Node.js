@@ -3,7 +3,11 @@ import contactModel from "../Models/contactMode.js";
 // @route : GET /api/contacts
 // @ access : Private
 export const getContacts = async(req, resp) => {
-    const data = await contactModel.find({user_id:req.user.id});
+    let data = await contactModel.find({user_id:req.user.id});
+    if(data.length == 0)
+      {
+        resp.status(404).json({error : "No data found!"})
+      }
     console.log(data);
   resp.status(200).json(data);
 };
@@ -13,7 +17,9 @@ export const getContacts = async(req, resp) => {
 // @ access : Private
 export const createContact = async(req, resp) => {
     let {name,email,phone} = req.body;
+      console.log("Id for user who is logged in : ",req.user.id);
         const data = await contactModel.create({
+            user_id: req.user.id,
             name,
             email,
             phone

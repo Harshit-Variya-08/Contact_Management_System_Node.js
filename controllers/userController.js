@@ -50,6 +50,7 @@ import cookieParser from 'cookie-parser';
                         id : user.id
                     }},process.env.JWT_SECRET,{expiresIn: "10m"});
                     resp.cookie("loginToken",accessToken);
+                     
                     resp.json({ message: "Logged in" ,token : accessToken});
                 }
                 else

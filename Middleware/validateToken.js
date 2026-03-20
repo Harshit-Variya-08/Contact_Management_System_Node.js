@@ -14,7 +14,7 @@ const validateToken = (req,resp,next)=>
                         {
                         return resp.status(401).json({message: "User is not Authorized."})
                         }
-                        req.user= decoded;
+                        req.user= decoded.user;
                     console.log("Data for authorized person : ",decoded);
                     next();
                 });
